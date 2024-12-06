@@ -5,9 +5,9 @@
 import 'package:pigeon/pigeon.dart';
 
 @ConfigurePigeon(PigeonOptions(
-  dartOut: 'lib/src/messages.g.dart',
+  dartOut: 'lib/messages.g.dart',
   swiftOptions: SwiftOptions(),
-  swiftOut: 'macos/Classes/messages.g.m',
+  swiftOut: 'macos/Classes/messages.g.m.swift',
   copyrightHeader: 'pigeons/copyright.txt',
 ))
 
@@ -303,7 +303,7 @@ abstract class CameraApi {
 @FlutterApi()
 abstract class CameraGlobalEventApi {
   /// Called when the device's physical orientation changes.
-  void deviceOrientationChanged(PlatformDeviceOrientation orientation);
+  void deviceOrientationChanged(int orientation);
 }
 
 /// Handler for native callbacks that are tied to a specific camera ID.

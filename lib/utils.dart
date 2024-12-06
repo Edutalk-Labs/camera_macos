@@ -49,14 +49,13 @@ PlatformDeviceOrientation serializeDeviceOrientation(
 }
 
 /// Converts a Pigeon [PlatformDeviceOrientation] to a [DeviceOrientation].
-DeviceOrientation deviceOrientationFromPlatform(
-    PlatformDeviceOrientation orientation) {
+DeviceOrientation deviceOrientationFromPlatform(int orientation) {
   return switch (orientation) {
-    PlatformDeviceOrientation.portraitUp => DeviceOrientation.portraitUp,
-    PlatformDeviceOrientation.portraitDown => DeviceOrientation.portraitDown,
-    PlatformDeviceOrientation.landscapeLeft => DeviceOrientation.landscapeLeft,
-    PlatformDeviceOrientation.landscapeRight =>
-      DeviceOrientation.landscapeRight,
+    0 => DeviceOrientation.portraitUp,
+    1 => DeviceOrientation.portraitDown,
+    2 => DeviceOrientation.landscapeLeft,
+    3 => DeviceOrientation.landscapeRight,
+    int() => throw UnimplementedError(),
   };
 }
 

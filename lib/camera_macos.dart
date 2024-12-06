@@ -513,13 +513,6 @@ class MacOSCamera extends CameraPlatform {
         return PlatformImageFileFormat.jpeg;
     }
     // The enum comes from a different package, which could get a new value at
-    // any time, so provide a fallback that ensures this won't break when used
-    // with a version that contains new values. This is deliberately outside
-    // the switch rather than a `default` so that the linter will flag the
-    // switch as needing an update.
-    // TODO(stuartmorgan): Consider throwing an UnsupportedError, instead of
-    // doing fallback, when a specific unsupported format is requested. This
-    // would require a breaking change at this layer and the app-facing layer.
     // ignore: dead_code
     return PlatformImageFileFormat.jpeg;
   }
@@ -541,16 +534,13 @@ class HostDeviceMessageHandler implements CameraGlobalEventApi {
     CameraGlobalEventApi.setUp(this);
   }
 
-  /// The controller used to broadcast general device events coming from the
-  /// host platform.
-  ///
   /// It is a `broadcast` because multiple controllers will connect to
   /// different stream views of this Controller.
   final StreamController<DeviceEvent> deviceEventStreamController =
       StreamController<DeviceEvent>.broadcast();
 
   @override
-  void deviceOrientationChanged(PlatformDeviceOrientation orientation) {
+  void deviceOrientationChanged(int orientation) {
     deviceEventStreamController.add(DeviceOrientationChangedEvent(
         deviceOrientationFromPlatform(orientation)));
   }
@@ -562,12 +552,12 @@ class HostCameraMessageHandler implements CameraEventApi {
   /// Creates a new handler that listens for events from camera [cameraId], and
   /// broadcasts them to [streamController].
   HostCameraMessageHandler(this.cameraId, this.streamController) {
-    CameraEventApi.setUp(this, messageChannelSuffix: cameraId.toString());
+    CameraEventApi.setUp(this);
   }
 
   /// Removes the handler for native messages.
   void dispose() {
-    CameraEventApi.setUp(null, messageChannelSuffix: cameraId.toString());
+    CameraEventApi.setUp(null);
   }
 
   /// The camera ID this handler listens for events from.
