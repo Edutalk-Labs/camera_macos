@@ -2,6 +2,7 @@ name: camera_macos
 description: "A new Flutter plugin project."
 version: 0.0.1
 homepage:
+publish_to: none
 
 environment:
   sdk: ^3.5.4
@@ -10,12 +11,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
+  async: ^2.5.0
+  camera_platform_interface:
+    git:
+      url: https://github.com/dothanhbinh41/camera_platform_interface
+      ref: main  # Nhánh, tag, hoặc comm 
+  meta: ^1.7.0
+  stream_transform: ^2.1.0
+  pigeon: ^9.1.0  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^4.0.0  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
